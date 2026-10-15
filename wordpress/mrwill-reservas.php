@@ -431,7 +431,8 @@ add_action( 'wp_footer', function () {
 .mw-res button:focus{outline:none}
 .mw-res button:focus-visible,.mw-res a:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .mw-res .mw-res__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);animation:mwFade .2s ease}
-.mw-res .mw-res__dialog{position:relative;width:100%;max-width:30rem;max-height:calc(100vh - 2rem);overflow:auto;background:#111113;color:#e5e5e5;border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;padding:2rem 1.75rem 1.75rem;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(229,25,32,.08);animation:mwUp .25s ease;outline:none}
+.mw-res .mw-res__dialog{position:relative;width:100%;max-width:30rem;max-height:calc(100vh - 2rem);overflow:auto;background:#111113;color:#e5e5e5;border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;padding:2rem 1.75rem 1.75rem;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(229,25,32,.08);animation:mwUp .25s ease;outline:none;scrollbar-width:none;-ms-overflow-style:none}
+.mw-res .mw-res__dialog::-webkit-scrollbar{display:none;width:0;height:0}
 @keyframes mwFade{from{opacity:0}}@keyframes mwUp{from{opacity:0;transform:translateY(16px) scale(.98)}}
 .mw-res .mw-res__x{position:absolute;top:.9rem;right:.9rem;width:2.25rem;height:2.25rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
 .mw-res .mw-res__x:hover{background:#e51920;border-color:#e51920}
