@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MR WILL - Pollos &amp; Parrillas | El Sabor Que Nos Une</title>
+    <!-- Google Fonts: Inter for clean UI, Caveat / Kaushan Script for bottom signature -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Montserrat:wght@400;500;600;700;800;900&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=Poppins:wght@700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Font Awesome 6 Icons (CSS Font-based icons, no inline SVG) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#DC2626',
+                            brightRed: '#E50914',
+                            hoverRed: '#B91C1C',
+                            dark: '#0A0A0A',
+                            cardBg: 'rgba(25, 25, 25, 0.65)'
+                        },
+                        brandDark: '#080808',
+                        brandRed: '#e51920',
+                        brandRedGlow: '#ff2828',
+                        brandRedMuted: '#961014'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        script: ['"Caveat"', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- BEGIN: Custom Global Styles -->
+    <style data-purpose="ambient-glow-and-effects">
+        /* Subtle flame/ember animated glow behind hero elements */
+        .glow-radial {
+            background: radial-gradient(circle at 65% 55%, rgba(220, 38, 38, 0.18) 0%, rgba(185, 28, 28, 0.08) 35%, transparent 70%);
+        }
+
+        .ember-spot {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(8px);
+            pointer-events: none;
+            animation: floatEmber 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatEmber {
+            0% {
+                transform: translateY(0px) scale(0.95);
+                opacity: 0.35;
+            }
+
+            100% {
+                transform: translateY(-12px) scale(1.1);
+                opacity: 0.65;
+            }
+        }
+
+        /* Red underline dynamic marker */
+        .nav-indicator::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 2.5px;
+            background-color: #E50914;
+            border-radius: 9999px;
+        }
+
+        /* Menu Accordion Interactive Row (Light Theme - Minimalist & Clean with Brand Identity) */
+        .font-brand-display {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .menu-accordion-item {
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.35, 1);
+            overflow: hidden;
+        }
+
+        .menu-accordion-item:first-child {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* The thumbnail preview pill */
+        .menu-row-thumb {
+            width: 130px;
+            height: 60px;
+            border-radius: 9999px;
+            overflow: hidden;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            flex-shrink: 0;
+        }
+        @media (min-width: 640px) {
+            .menu-row-thumb {
+                width: 175px;
+                height: 76px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .menu-row-thumb {
+                width: 200px;
+                height: 86px;
+            }
+        }
+
+        /* The circular action button */
+        .menu-row-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 9999px;
+            border: 1.5px solid rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            color: #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.35, 1);
+            flex-shrink: 0;
+        }
+        @media (min-width: 640px) {
+            .menu-row-btn {
+                width: 56px;
+                height: 56px;
+            }
+        }
+
+        /* Background banner that expands on hover */
+        .menu-row-bg-banner {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.25, 1, 0.35, 1), transform 0.55s cubic-bezier(0.25, 1, 0.35, 1);
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        /* Content layer */
+        .menu-row-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Title text */
+        .menu-row-title {
+            transition: color 0.35s ease, transform 0.4s cubic-bezier(0.25, 1, 0.35, 1), letter-spacing 0.35s ease;
+        }
+
+        /* Hover / Active expansion state */
+        .menu-accordion-item:hover .menu-row-bg-banner,
+        .menu-accordion-item.is-active .menu-row-bg-banner {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .menu-accordion-item:hover .menu-row-thumb,
+        .menu-accordion-item.is-active .menu-row-thumb {
+            opacity: 0;
+            transform: scale(0.85);
+            pointer-events: none;
+        }
+
+        .menu-accordion-item:hover .menu-row-title,
+        .menu-accordion-item.is-active .menu-row-title {
+            color: #ffffff !important;
+            transform: translateX(10px);
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
+        }
+
+        .menu-accordion-item:hover .menu-row-btn,
+        .menu-accordion-item.is-active .menu-row-btn {
+            background-color: #e51920 !important;
+            border-color: #e51920 !important;
+            color: #ffffff !important;
+            transform: scale(1.08) rotate(-45deg);
+            box-shadow: 0 4px 20px rgba(229, 25, 32, 0.4);
+        }
+
+        .menu-accordion-item:hover .menu-row-sparkle,
+        .menu-accordion-item.is-active .menu-row-sparkle {
+            color: #e51920 !important;
+            transform: scale(1.3) rotate(180deg);
+        }
+
+        /* Review Speech Bubble Cards (matching user reference) */
+        .review-bubble {
+            position: relative;
+            background-color: #ffffff;
+            border-radius: 28px;
+            padding: 36px 32px 32px 32px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .review-bubble:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.09);
+        }
+
+        /* Speech bubble pointer / tail at bottom-left */
+        .review-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 36px;
+            width: 24px;
+            height: 24px;
+            background-color: #ffffff;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            border-bottom-left-radius: 4px;
+        }
+
+        /* Section 3 styles */
+        .bg-dark-vignette {
+            background: radial-gradient(circle at 75% 45%, rgba(185, 20, 26, 0.18) 0%, rgba(10, 10, 10, 0.95) 60%, #070707 100%);
+        }
+
+        .brush-splash {
+            position: absolute;
+            width: 480px;
+            height: 120px;
+            background: linear-gradient(115deg, #c71217 0%, #e51920 45%, #88090d 100%);
+            transform: rotate(-24deg) skewX(-20deg);
+            border-radius: 9999px;
+            filter: blur(2px) drop-shadow(0 0 25px rgba(229, 25, 32, 0.6));
+            opacity: 0.85;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .icon-glow-ring {
+            box-shadow: 0 0 16px rgba(229, 25, 32, 0.35), inset 0 0 12px rgba(229, 25, 32, 0.2);
+            border: 1.5px solid rgba(229, 25, 32, 0.65);
+        }
+
+        .font-script-calligraphy {
+            font-family: 'Caveat', cursive;
+            letter-spacing: 0.02em;
+        }
+
+        /* Section 4 styles */
+        .headline-tight {
+            letter-spacing: -0.025em;
+            line-height: 1.12;
+        }
+
+        /* Section 5 styles */
+        @keyframes subtleFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0.5deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(-0.5deg);
+            }
+        }
+
+        .animate-float {
+            animation: subtleFloat 5s ease-in-out infinite;
+        }
+
+        .brush-slash {
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.9) 0%, rgba(185, 28, 28, 0.75) 55%, transparent 100%);
+            transform: skewX(-24deg);
+            filter: blur(1px);
+        }
+
+        .bg-radial-glow {
+            background: radial-gradient(circle at 18% 50%, rgba(229, 9, 20, 0.12) 0%, rgba(0, 0, 0, 0) 50%);
+        }
+
+        .glass-feature-card {
+            background: rgba(18, 18, 20, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), inset 0 1px 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        /* Seamless Marquee Animations for Section 5 Background */
+        @keyframes marqueeScroll {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(-50%, 0, 0);
+            }
+        }
+
+        @keyframes marqueeScrollReverse {
+            0% {
+                transform: translate3d(-50%, 0, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .animate-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 30s linear infinite;
+            will-change: transform;
+        }
+
+        .animate-marquee-track-reverse {
+            display: flex;
+            width: max-content;
+            animation: marqueeScrollReverse 34s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-outline-text {
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 900;
+            color: transparent !important;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35) !important;
+            -webkit-text-fill-color: transparent !important;
+            user-select: none;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+        }
+        @media (min-width: 640px) {
+            .marquee-outline-text {
+                -webkit-text-stroke: 2px rgba(255, 255, 255, 0.4) !important;
+                letter-spacing: 0.06em;
+            }
+        }
+
+        /* Section 6 styles (Testimonios & Locales) */
+        .bg-charcoal-radial {
+            background: radial-gradient(circle at 50% 20%, #151922 0%, #080A0D 100%);
+        }
+
+        .slate-texture {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .pin-glow {
+            filter: drop-shadow(0 0 6px rgba(229, 26, 26, 0.85)) drop-shadow(0 0 12px rgba(229, 26, 26, 0.45));
+            animation: pulse-pin 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-pin {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.9; }
+        }
+
+        .testimonial-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Filter to invert black logo to pure crisp white while maintaining transparent background */
+        .logo-white {
+            filter: brightness(0) invert(1);
+        }
+
+        /* Entrance Animations (Scroll & Load Reveals) */
+        .reveal, .reveal-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .is-revealed {
+            opacity: 1 !important;
+            transform: translate3d(0, 0, 0) scale(1) !important;
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-150 { transition-delay: 150ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-250 { transition-delay: 250ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* Hollow / Outlined Typography for Hero Display with clean external borders without crossing artifacts */
+        .text-stroke-white,
+        .outline-text {
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 900;
+            color: transparent !important;
+            -webkit-text-stroke: 1.5px #ffffff !important;
+            -webkit-text-fill-color: transparent !important;
+            letter-spacing: 0.04em;
+            display: inline-block;
+        }
+        @media (min-width: 640px) {
+            .text-stroke-white,
+            .outline-text {
+                -webkit-text-stroke: 2px #ffffff !important;
+                letter-spacing: 0.05em;
+            }
+        }
+        @media (min-width: 1024px) {
+            .text-stroke-white,
+            .outline-text {
+                -webkit-text-stroke: 2.5px #ffffff !important;
+            }
+        }
+        /* Header scrolled state: compact height */
+        #main-header {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #main-header .header-inner {
+            transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #main-header .brand-logo-img {
+            transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #main-header .header-nav {
+            transition: margin-top 0.35s cubic-bezier(0.16, 1, 0.3, 1), gap 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #main-header.header-scrolled .header-inner {
+            padding-top: 0.35rem !important;
+            padding-bottom: 0.35rem !important;
+        }
+        #main-header.header-scrolled .brand-logo-img {
+            height: 1.85rem !important; /* ~30px compact logo */
+        }
+        @media (min-width: 640px) {
+            #main-header.header-scrolled .brand-logo-img {
+                height: 2.15rem !important; /* ~34px compact logo */
+            }
+        }
+        /* Mobile Sidebar Drawer */
+        #mobile-sidebar-backdrop {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #mobile-sidebar {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #mobile-sidebar.open {
+            transform: translateX(0) !important;
+        }
+        #mobile-sidebar-backdrop.open {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+    </style>
+    <!-- END: Custom Global Styles -->
+</head>
+
+<body
+    class="bg-[#0A0A0A] text-white font-sans antialiased overflow-x-clip min-h-screen relative selection:bg-brand-brightRed selection:text-white">
+    <!-- BEGIN: Ambient Background Texture and Atmosphere -->
+    <div aria-hidden="true" class="fixed inset-0 pointer-events-none z-0 glow-radial"></div>
+    <div aria-hidden="true"
+        class="fixed w-96 h-96 -top-20 -left-20 bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div aria-hidden="true" class="ember-spot w-72 h-72 bottom-10 left-1/3 bg-orange-600/15"></div>
+    <!-- END: Ambient Background Texture and Atmosphere -->
+    <!-- BEGIN: MainHeader / Navigation -->
+    <header id="main-header"
+        class="fixed top-0 left-0 right-0 z-50 w-full bg-transparent border-b border-transparent transition-all duration-300">
+        <div class="header-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between md:flex-col md:justify-center text-center">
+            
+            <!-- Brand Logo (Left on mobile, centered on md/lg) -->
+            <a aria-label="MR WILL - Inicio"
+                class="flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-lg transition-transform duration-300 hover:scale-105"
+                href="#inicio">
+                <img src="imagenes/logo MR WILL -  horizontal.png" 
+                     alt="MR WILL - Pollos &amp; Parrillas" 
+                     class="brand-logo-img h-9 sm:h-11 md:h-14 w-auto object-contain logo-white drop-shadow-[0_2px_14px_rgba(255,255,255,0.2)]" />
+            </a>
+
+            <!-- Mobile Hamburger Button (Visible only on mobile < md) -->
+            <button id="mobile-menu-open-btn"
+                type="button"
+                aria-label="Abrir menú de navegación"
+                class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white border border-white/15 backdrop-blur-md transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                <i class="fa-solid fa-bars-staggered text-lg"></i>
+            </button>
+
+            <!-- Desktop / Tablet Navigation Links (Hidden on mobile < md) -->
+            <nav aria-label="Navegación principal"
+                class="header-nav hidden md:flex flex-wrap items-center justify-center gap-6 lg:gap-10 text-xs sm:text-sm font-medium tracking-wide mt-2 sm:mt-2.5">
+                <a class="relative text-white font-semibold nav-indicator transition-colors py-0.5 sm:py-1" href="#inicio">Inicio</a>
+                <a class="text-zinc-400 hover:text-white transition-colors duration-200 py-0.5 sm:py-1" href="#menu">Nuestro Menú</a>
+                <a class="text-zinc-400 hover:text-white transition-colors duration-200 py-0.5 sm:py-1" href="#locales">Nuestro Local</a>
+                <a class="text-zinc-400 hover:text-white transition-colors duration-200 py-0.5 sm:py-1" href="#nosotros">Sobre Nosotros</a>
+                <a class="text-zinc-400 hover:text-white transition-colors duration-200 py-0.5 sm:py-1" href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+    <!-- END: MainHeader / Navigation -->
+
+    <!-- BEGIN: Mobile Sidebar Drawer & Backdrop Overlay -->
+    <div id="mobile-sidebar-backdrop" 
+         class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 opacity-0 invisible pointer-events-none transition-all duration-300" 
+         aria-hidden="true"></div>
+
+    <aside id="mobile-sidebar"
+           role="dialog"
+           aria-modal="true"
+           aria-label="Menú lateral móvil"
+           class="fixed top-0 right-0 bottom-0 w-[82vw] max-w-sm bg-[#111113] border-l border-white/10 z-50 flex flex-col justify-between p-6 shadow-[0_0_50px_rgba(0,0,0,0.9)] translate-x-full transition-transform duration-300 ease-out select-none">
+        
+        <!-- Sidebar Header (Logo + Close Button) -->
+        <div>
+            <div class="flex items-center justify-between pb-6 border-b border-white/10">
+                <a href="#inicio" class="mobile-sidebar-link flex items-center">
+                    <img src="imagenes/logo MR WILL -  horizontal.png" 
+                         alt="MR WILL" 
+                         class="h-8 w-auto object-contain logo-white" />
+                </a>
+                <button id="mobile-sidebar-close-btn"
+                        type="button"
+                        aria-label="Cerrar menú"
+                        class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex flex-col gap-2 mt-6" aria-label="Enlaces de navegación móvil">
+                <a href="#inicio" class="mobile-sidebar-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-base font-semibold text-white bg-white/5 hover:bg-red-600/15 hover:text-red-400 transition-colors">
+                    <i class="fa-solid fa-house text-[#E50914] w-5 text-center"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="#menu" class="mobile-sidebar-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-base font-semibold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">
+                    <i class="fa-solid fa-utensils text-[#E50914] w-5 text-center"></i>
+                    <span>Nuestro Menú</span>
+                </a>
+                <a href="#locales" class="mobile-sidebar-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-base font-semibold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">
+                    <i class="fa-solid fa-location-dot text-[#E50914] w-5 text-center"></i>
+                    <span>Nuestro Local</span>
+                </a>
+                <a href="#nosotros" class="mobile-sidebar-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-base font-semibold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">
+                    <i class="fa-solid fa-fire text-[#E50914] w-5 text-center"></i>
+                    <span>Sobre Nosotros</span>
+                </a>
+                <a href="#contacto" class="mobile-sidebar-link flex items-center gap-3.5 px-4 py-3 rounded-xl text-base font-semibold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">
+                    <i class="fa-solid fa-phone text-[#E50914] w-5 text-center"></i>
+                    <span>Contacto</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Sidebar Footer Actions (CTAs & Socials) -->
+        <div class="pt-6 border-t border-white/10 space-y-3">
+            <a href="#pedido" class="mobile-sidebar-link w-full flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-full text-sm font-bold tracking-wide text-white bg-gradient-to-r from-red-600 to-[#E50914] hover:from-red-500 hover:to-red-600 transition-all">
+                <i class="fa-solid fa-cart-shopping text-xs"></i>
+                <span>Hacer Pedido en Línea</span>
+            </a>
+            <a href="https://wa.me/51999999999?text=Hola%20MR%20WILL,%20deseo%20hacer%20un%20pedido" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2.5 px-5 py-3 rounded-full text-sm font-semibold text-neutral-200 bg-white/5 hover:bg-white/10 transition-all">
+                <i class="fa-brands fa-whatsapp text-green-500 text-base"></i>
+                <span>Pedir por WhatsApp</span>
+            </a>
+        </div>
+    </aside>
+    <!-- END: Mobile Sidebar Drawer -->
+    <!-- BEGIN: Hero Section -->
+    <main class="relative min-h-[92vh] sm:min-h-screen flex items-center justify-center overflow-hidden pt-28 sm:pt-32 pb-16" id="inicio">
+        <!-- Hero Background Image (Roasted Chicken over Charcoal Grill centered) -->
+        <div class="absolute inset-0 z-0 pointer-events-none select-none">
+            <img alt="MR WILL delicioso pollo a la brasa dorado crujiente sobre brasas de carbón ardientes"
+                class="w-full h-full object-cover object-center filter brightness-95 contrast-105"
+                src="imagenes/delicious_whole_peruvian_roasted_rotisserie_chicken_pollo_a_la_brasa_sizzling.png" />
+            <!-- Soft radial spotlight and edge blends to emphasize center image and typography -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(10,10,10,0.5)_65%,rgba(10,10,10,0.95)_100%)]"></div>
+            <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0A0A0A]/90 via-[#0A0A0A]/40 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent"></div>
+        </div>
+
+    
+      
+
+        <!-- Hero Content Container: Pure Centered Giant Typography -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center flex flex-col items-center justify-center select-none py-12">
+            <!-- Subtitle / Tagline Eyebrow -->
+            <div class="mb-2 sm:mb-4 reveal-up">
+                <span class="inline-block text-[11px] sm:text-xs md:text-sm tracking-[0.35em] sm:tracking-[0.45em] uppercase text-zinc-300 font-semibold font-display drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                    POLLOS Y PARRILLAS
+                </span>
+            </div>
+
+            <!-- Giant Hero Headline matching reference composition -->
+            <h1 class="flex flex-col items-center justify-center font-black font-display tracking-tight leading-[0.88] sm:leading-[0.86] uppercase w-full">
+                <!-- Line 1: Solid White Bold Text -->
+                <span class="block text-5xl sm:text-7xl md:text-8xl lg:text-[8.5rem] xl:text-[10rem] 2xl:text-[11.5rem] text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.9)] reveal-up delay-100">
+                    EL SABOR
+                </span>
+                <!-- Line 2: Hollow / Outlined Text showing background chicken & embers through it -->
+                <span class="block text-4xl sm:text-6xl md:text-7xl lg:text-[7.5rem] xl:text-[8.8rem] 2xl:text-[10.2rem] text-stroke-white drop-shadow-[0_10px_35px_rgba(0,0,0,0.7)] reveal-up delay-200 mt-0 sm:mt-1" style="font-family: 'Poppins', sans-serif !important; font-weight: 900;">
+                    QUE NOS UNE
+                </span>
+            </h1>
+
+            <!-- Hero Action CTAs (Haz tu pedido & Haz tu reserva) -->
+            <div class="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-5 reveal-up delay-300">
+                <!-- CTA 1: Haz tu pedido (Ícono de teléfono) -->
+                <a href="#pedido" 
+                   class="inline-flex items-center gap-2.5 px-8 sm:px-10 py-4 sm:py-4.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-brandRed hover:bg-[#b81424] transition-all duration-300 shadow-xl hover:shadow-red-600/30 transform hover:-translate-y-0.5 active:translate-y-0">
+                    <i class="fa-solid fa-phone text-sm"></i>
+                    <span>Haz tu pedido</span>
+                </a>
+                
+                <!-- CTA 2: Haz tu reserva (Ícono de calendario, abre modal 2 pasos) -->
+                <button type="button" 
+                   onclick="openReservationModal()"
+                   class="inline-flex items-center gap-2.5 px-8 sm:px-9 py-4 sm:py-4.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/25 hover:border-white/40 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
+                    <i class="fa-solid fa-calendar-days text-sm text-brandRed"></i>
+                    <span>Haz tu reserva</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Torn Paper Border Divider at bottom of Hero -->
+        <div class="absolute bottom-0 left-0 right-0 w-full z-20 pointer-events-none select-none overflow-hidden leading-none translate-y-[2px]">
+            <img src="imagenes/torn_paper_divider.png" 
+                 alt="Borde rasgado decorativo" 
+                 class="w-full h-8 sm:h-12 md:h-14 lg:h-16 object-fill filter brightness-100 contrast-105" />
+        </div>
+    </main>
+    <!-- END: Hero Section -->
+
+    <!-- BEGIN: Menu Highlights Section (Sección 2 - Clean Minimalist Light Menu) -->
+    <section id="menu" class="relative w-full overflow-hidden py-16 sm:py-20 z-10 bg-[#FAF9F6] text-zinc-900 border-b border-black/5" data-purpose="interactive-menu-accordion">
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
+            
+            <!-- Section Kicker (Clean & Minimal with Brand Red: ✦ EXPLORA NUESTRA SELECCIÓN ✦) -->
+            <div class="text-center mb-10 sm:mb-14">
+                <div class="inline-flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold tracking-[0.28em] text-brandRed uppercase font-display">
+                    <span class="text-[10px] text-brandRed">✦</span>
+                    <span>EXPLORA NUESTRA SELECCIÓN</span>
+                    <span class="text-[10px] text-brandRed">✦</span>
+                </div>
+            </div>
+
+            <!-- Accordion List Container -->
+            <div class="menu-accordion-list flex flex-col w-full">
+                
+                <!-- ROW 1: POLLOS A LA BRASA -->
+                <a href="#pedido" class="menu-accordion-item group block cursor-pointer" data-category="pollos">
+                    <!-- Background Photo Banner (Expands & reveals on hover) -->
+                    <div class="menu-row-bg-banner">
+                        <img src="imagenes/delicious_whole_peruvian_roasted_rotisserie_chicken_pollo_a_la_brasa_sizzling.png" 
+                             alt="Pollo a la brasa MR WILL" 
+                             class="w-full h-full object-cover object-center filter brightness-[0.72] contrast-110" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/75"></div>
+                    </div>
+
+                    <!-- Foreground Content -->
+                    <div class="menu-row-content py-5 sm:py-7 lg:py-8 px-3 sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-between gap-4 sm:gap-8">
+                            
+                            <!-- Left: Thumbnail Pill (Fades on hover) -->
+                            <div class="menu-row-thumb shadow-sm border border-black/10 bg-white">
+                                <img src="imagenes/delicious_peruvian_rotisserie_roasted_chicken_pollo_a_la_brasa_perfectly_glazed.png" 
+                                     alt="Pollo a la brasa" 
+                                     class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+
+                            <!-- Center: Title + Sparkle -->
+                            <div class="flex-1 flex items-center justify-center gap-3 sm:gap-6 min-w-0">
+                                <h3 class="menu-row-title font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight text-neutral-900 truncate">
+                                    POLLOS A LA BRASA
+                                </h3>
+                                <span class="menu-row-sparkle text-brandRed text-xs sm:text-sm transition-all duration-400 select-none">✦</span>
+                            </div>
+
+                            <!-- Right: Circular Action Arrow Button -->
+                            <div class="menu-row-btn">
+                                <i class="fa-solid fa-arrow-right text-base sm:text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- ROW 2: CORTES & PARRILLAS -->
+                <a href="#pedido" class="menu-accordion-item group block cursor-pointer" data-category="parrillas">
+                    <!-- Background Photo Banner -->
+                    <div class="menu-row-bg-banner">
+                        <img src="imagenes/juicy_grilled_steak_parrilla_cut_with_grill_marks_served_on_a_black_sizzling.png" 
+                             alt="Cortes de carne a la parrilla MR WILL" 
+                             class="w-full h-full object-cover object-center filter brightness-[0.72] contrast-110" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/75"></div>
+                    </div>
+
+                    <!-- Foreground Content -->
+                    <div class="menu-row-content py-5 sm:py-7 lg:py-8 px-3 sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-between gap-4 sm:gap-8">
+                            
+                            <!-- Left: Thumbnail Pill -->
+                            <div class="menu-row-thumb shadow-sm border border-black/10 bg-white">
+                                <img src="imagenes/bento_sliced_steak_board.jpg" 
+                                     alt="Cortes a la parrilla" 
+                                     class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+
+                            <!-- Center: Title + Sparkle -->
+                            <div class="flex-1 flex items-center justify-center gap-3 sm:gap-6 min-w-0">
+                                <h3 class="menu-row-title font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight text-neutral-900 truncate">
+                                    CORTES &amp; PARRILLAS
+                                </h3>
+                                <span class="menu-row-sparkle text-brandRed text-xs sm:text-sm transition-all duration-400 select-none">✦</span>
+                            </div>
+
+                            <!-- Right: Circular Action Arrow Button -->
+                            <div class="menu-row-btn">
+                                <i class="fa-solid fa-arrow-right text-base sm:text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- ROW 3: GUARNICIONES & SALSAS -->
+                <a href="#pedido" class="menu-accordion-item group block cursor-pointer" data-category="guarniciones">
+                    <!-- Background Photo Banner -->
+                    <div class="menu-row-bg-banner">
+                        <img src="imagenes/crispy_golden_french_fries_in_a_bowl_with_fresh_salad_and_various_dipping.png" 
+                             alt="Papas fritas y ensaladas" 
+                             class="w-full h-full object-cover object-center filter brightness-[0.72] contrast-110" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/75"></div>
+                    </div>
+
+                    <!-- Foreground Content -->
+                    <div class="menu-row-content py-5 sm:py-7 lg:py-8 px-3 sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-between gap-4 sm:gap-8">
+                            
+                            <!-- Left: Thumbnail Pill -->
+                            <div class="menu-row-thumb shadow-sm border border-black/10 bg-white">
+                                <img src="imagenes/crispy_golden_french_fries_in_a_bowl_with_fresh_salad_and_various_dipping.png" 
+                                     alt="Guarniciones y salsas" 
+                                     class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+
+                            <!-- Center: Title + Sparkle -->
+                            <div class="flex-1 flex items-center justify-center gap-3 sm:gap-6 min-w-0">
+                                <h3 class="menu-row-title font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight text-neutral-900 truncate">
+                                    GUARNICIONES &amp; SALSAS
+                                </h3>
+                                <span class="menu-row-sparkle text-brandRed text-xs sm:text-sm transition-all duration-400 select-none">✦</span>
+                            </div>
+
+                            <!-- Right: Circular Action Arrow Button -->
+                            <div class="menu-row-btn">
+                                <i class="fa-solid fa-arrow-right text-base sm:text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- ROW 4: COMBOS FAMILIARES -->
+                <a href="#pedido" class="menu-accordion-item group block cursor-pointer" data-category="combos">
+                    <!-- Background Photo Banner -->
+                    <div class="menu-row-bg-banner">
+                        <img src="imagenes/clean_commercial_food_photography_of_a_whole_roasted_rotisserie_chicken_pollo_a.png" 
+                             alt="Combos familiares MR WILL" 
+                             class="w-full h-full object-cover object-center filter brightness-[0.72] contrast-110" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/75"></div>
+                    </div>
+
+                    <!-- Foreground Content -->
+                    <div class="menu-row-content py-5 sm:py-7 lg:py-8 px-3 sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-between gap-4 sm:gap-8">
+                            
+                            <!-- Left: Thumbnail Pill -->
+                            <div class="menu-row-thumb shadow-sm border border-black/10 bg-white">
+                                <img src="imagenes/delicious_whole_peruvian_roasted_rotisserie_chicken_pollo_a_la_brasa_sizzling.png" 
+                                     alt="Combos familiares" 
+                                     class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-500" />
+                            </div>
+
+                            <!-- Center: Title + Sparkle -->
+                            <div class="flex-1 flex items-center justify-center gap-3 sm:gap-6 min-w-0">
+                                <h3 class="menu-row-title font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight text-neutral-900 truncate">
+                                    COMBOS FAMILIARES
+                                </h3>
+                                <span class="menu-row-sparkle text-brandRed text-xs sm:text-sm transition-all duration-400 select-none">✦</span>
+                            </div>
+
+                            <!-- Right: Circular Action Arrow Button -->
+                            <div class="menu-row-btn">
+                                <i class="fa-solid fa-arrow-right text-base sm:text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- END: Menu Highlights Section (Sección 2 - Clean Minimalist Light Menu) -->
+
+    <!-- BEGIN: Pollería & Parrillas Section (Sección 3 - 2 Columnas 100% de Ancho Pegadas a los Bordes) -->
+    <section id="nosotros" class="relative w-full overflow-hidden z-10 bg-[#0A0A0A]">
+        
+        <!-- Grid de 2 Columnas Flush (100% Ancho de pantalla pegado a los bordes, con misma altura en las 4 cards) -->
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 border-t border-b border-white/10">
+            
+            <!-- CARD 1: IMAGEN SOLA (Columna Izquierda, Fila 1) -->
+            <div class="group relative w-full h-[360px] sm:h-[440px] lg:h-[500px] xl:h-[540px] overflow-hidden bg-neutral-950 border-b md:border-r border-white/10">
+                <img src="imagenes/delicious_whole_peruvian_roasted_rotisserie_chicken_pollo_a_la_brasa_sizzling.png" 
+                     alt="Pollo a la brasa al carbón MR WILL" 
+                     class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-95 contrast-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- CARD 2: IMAGEN + POCO TEXTO (Razón 1: ¿Por qué elegirnos?) -->
+            <div class="group relative w-full h-[360px] sm:h-[440px] lg:h-[500px] xl:h-[540px] overflow-hidden bg-neutral-950 border-b border-white/10 flex flex-col justify-end">
+                <img src="imagenes/delicious_peruvian_rotisserie_roasted_chicken_pollo_a_la_brasa_perfectly_glazed.png" 
+                     alt="Pollo a la brasa dorado crujiente MR WILL" 
+                     class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-90 contrast-105" />
+                <!-- Degradado inferior limpio para lectura perfecta -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent pointer-events-none"></div>
+                
+                <div class="relative z-10 p-8 sm:p-12 lg:p-16 max-w-xl">
+                    <span class="text-brandRed text-xs sm:text-sm font-bold uppercase tracking-[0.22em] font-display block mb-2">
+                        ¿Por qué elegirnos?
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black uppercase text-white font-display tracking-tight leading-tight">
+                        100% Carbón Natural
+                    </h3>
+                    <p class="text-neutral-300 text-sm sm:text-base mt-2.5 leading-relaxed">
+                        Horneado a fuego lento con receta tradicional. Piel crocante y sabor inconfundible.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CARD 3: IMAGEN + POCO TEXTO (Razón 2: ¿Por qué elegirnos?) -->
+            <div class="group relative w-full h-[360px] sm:h-[440px] lg:h-[500px] xl:h-[540px] overflow-hidden bg-neutral-950 md:border-r border-white/10 flex flex-col justify-end border-b md:border-b-0">
+                <img src="imagenes/juicy_grilled_steak_parrilla_cut_with_grill_marks_served_on_a_black_sizzling.png" 
+                     alt="Cortes a la parrilla jugosos MR WILL" 
+                     class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-90 contrast-105" />
+                <!-- Degradado inferior limpio para lectura perfecta -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent pointer-events-none"></div>
+                
+                <div class="relative z-10 p-8 sm:p-12 lg:p-16 max-w-xl">
+                    <span class="text-brandRed text-xs sm:text-sm font-bold uppercase tracking-[0.22em] font-display block mb-2">
+                        ¿Por qué elegirnos?
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black uppercase text-white font-display tracking-tight leading-tight">
+                        Cortes &amp; Máxima Calidad
+                    </h3>
+                    <p class="text-neutral-300 text-sm sm:text-base mt-2.5 leading-relaxed">
+                        Carnes seleccionadas en su punto exacto de brasa, frescura y jugosidad garantizada.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CARD 4: IMAGEN SOLA (Columna Derecha, Fila 2) -->
+            <div class="group relative w-full h-[360px] sm:h-[440px] lg:h-[500px] xl:h-[540px] overflow-hidden bg-neutral-950">
+                <img src="imagenes/crispy_golden_french_fries_in_a_bowl_with_fresh_salad_and_various_dipping.png" 
+                     alt="Papas crocantes y guarniciones" 
+                     class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-95 contrast-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+
+        </div>
+    </section>
+    <!-- END: Pollería & Parrillas Section -->
+
+    <!-- BEGIN: Promo Banner Section (Sección 4 - Minimalista, Limpio y Elegante) -->
+    <section id="especialidades" class="relative w-full overflow-hidden py-20 sm:py-28 lg:py-32 z-10 bg-[#FAF9F6] border-b border-black/5" aria-label="Especialidades MR WILL">
+        <!-- Background Commercial Food Photography (100% Full Width, Clean Editorial Blend) -->
+        <div aria-hidden="true" class="absolute inset-0 pointer-events-none select-none z-0">
+            <img alt="Nuestras Especialidades - Pollo a la brasa dorado crujiente MR WILL"
+                class="w-full h-full object-cover object-right sm:object-center filter brightness-100 contrast-[1.02]"
+                src="imagenes/clean_commercial_food_photography_of_a_whole_roasted_rotisserie_chicken_pollo_a.png" />
+            <!-- Suave degradado claro desde la izquierda para una integración limpia y pura del texto -->
+            <div class="absolute inset-0 bg-gradient-to-r from-[#FAF9F6] via-[#FAF9F6]/90 to-transparent w-full sm:w-[70%] lg:w-[58%]"></div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full flex items-center">
+            <article class="max-w-xl lg:max-w-2xl py-6" data-purpose="banner-content">
+                <!-- Kicker Minimalista -->
+                <div class="inline-flex items-center gap-2 mb-4">
+                    <span class="text-brandRed text-[10px]">✦</span>
+                    <span class="text-xs sm:text-sm font-bold tracking-[0.26em] uppercase text-brandRed font-display">
+                        NUESTRAS ESPECIALIDADES
+                    </span>
+                </div>
+
+                <!-- Headline Editorial & Minimalista -->
+                <h2 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-[54px] text-neutral-900 tracking-tight leading-[1.06] mb-5 uppercase">
+                    El pollo y la parrilla,<br />
+                    <span class="text-brandRed">en su mejor versión</span>
+                </h2>
+
+                <!-- Subtítulo limpio y conciso -->
+                <p class="text-sm sm:text-base lg:text-lg text-neutral-600 font-normal leading-relaxed max-w-md mb-8">
+                    Recetas al calor de la brasa elaboradas con pasión, ingredientes frescos y el toque maestro que nos distingue.
+                </p>
+
+                <!-- Botón de acción refinado y elegante -->
+                <div class="flex items-center">
+                    <a class="group inline-flex items-center gap-3 bg-neutral-900 hover:bg-brandRed text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 py-3.5 rounded-full transition-all duration-300"
+                        data-purpose="cta-button" href="#menu">
+                        <span>Explorar la carta</span>
+                        <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!-- END: Promo Banner Section (Sección 4) -->
+
+    <!-- BEGIN: App Download & Promo Banner Section (Sección 5 - Centered with Marquee & Superimposing Text Card) -->
+    <section id="pedido" class="relative w-full bg-[#0A0A0A] z-10 min-h-[145vh] sm:min-h-[160vh] flex flex-col items-center justify-between" data-purpose="app-banner-section">
+        
+        <!-- 1. PRIMERO: CELULAR STICKY CON MARQUEE DE TEXTOS OUTLINE DETRÁS (Pinned Near Top While Scrolling) -->
+        <div class="sticky top-16 sm:top-20 z-10 w-full flex flex-col justify-center items-center py-6 sm:py-8 pointer-events-none select-none overflow-hidden min-h-[380px] sm:min-h-[460px] lg:min-h-[520px]">
+            
+            <!-- MARQUEE DE TEXTOS OUTLINE CON TRANSPARENCIA DETRÁS DEL CELULAR (Z-0) -->
+            <div class="absolute inset-0 z-0 flex flex-col justify-center items-center gap-3 sm:gap-6 overflow-hidden pointer-events-none select-none w-full">
+                <!-- Track 1: Scroll continuo hacia la izquierda -->
+                <div class="animate-marquee-track flex items-center">
+                    <span class="marquee-outline-text font-black text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] xl:text-[8rem] uppercase tracking-wider px-6" style="font-family: 'Poppins', sans-serif !important; font-weight: 900; color: transparent !important; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35) !important; -webkit-text-fill-color: transparent !important;">
+                        PIDE EN LÍNEA &bull; MR WILL &bull; POLLOS &bull; PARRILLAS &bull; DELIVERY &bull; EN UNOS CLICS &bull;
+                    </span>
+                    <span class="marquee-outline-text font-black text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] xl:text-[8rem] uppercase tracking-wider px-6" style="font-family: 'Poppins', sans-serif !important; font-weight: 900; color: transparent !important; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35) !important; -webkit-text-fill-color: transparent !important;">
+                        PIDE EN LÍNEA &bull; MR WILL &bull; POLLOS &bull; PARRILLAS &bull; DELIVERY &bull; EN UNOS CLICS &bull;
+                    </span>
+                </div>
+                <!-- Track 2: Scroll continuo hacia la derecha (inverso) con mayor transparencia -->
+                <div class="animate-marquee-track-reverse flex items-center opacity-70">
+                    <span class="marquee-outline-text font-black text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] xl:text-[7.5rem] uppercase tracking-wider px-6" style="font-family: 'Poppins', sans-serif !important; font-weight: 900; color: transparent !important; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35) !important; -webkit-text-fill-color: transparent !important;">
+                        EL SABOR QUE NOS UNE &bull; FUEGO VIVO &bull; 100% CARBÓN &bull; RECOJO EN TIENDA &bull; RÁPIDO Y FÁCIL &bull;
+                    </span>
+                    <span class="marquee-outline-text font-black text-5xl sm:text-6xl md:text-7xl lg:text-[6.5rem] xl:text-[7.5rem] uppercase tracking-wider px-6" style="font-family: 'Poppins', sans-serif !important; font-weight: 900; color: transparent !important; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35) !important; -webkit-text-fill-color: transparent !important;">
+                        EL SABOR QUE NOS UNE &bull; FUEGO VIVO &bull; 100% CARBÓN &bull; RECOJO EN TIENDA &bull; RÁPIDO Y FÁCIL &bull;
+                    </span>
+                </div>
+            </div>
+
+            <!-- Floating Phone (Z-10, sits prominently over the marquee) -->
+            <div id="phone-parallax-img" class="relative z-10 will-change-transform transform-gpu transition-all duration-200">
+                <img alt="MR WILL App Pedidos en línea"
+                     class="w-64 sm:w-80 md:w-96 lg:w-[440px] max-w-full filter contrast-105 object-contain mx-auto"
+                     loading="lazy"
+                     src="imagenes/modern_sleek_black_smartphone_mockup_floating_at_a_slight_angle_on_a_transparent.png?v=2" />
+            </div>
+        </div>
+
+        <!-- 2. CAPA NEGRA CON TEXTOS QUE SE SUPERPONEN AL SCROLLEAR (Z-20, Overlays Phone, Limpio, Minimalista) -->
+        <div id="pedido-text-layer" class="relative z-20 w-full max-w-3xl mx-auto px-4 sm:px-6 mt-[18vh] sm:mt-[25vh] pb-16 sm:pb-24">
+            <!-- Contenedor limpio, directo, sin textos redundantes -->
+            <div class="relative w-full bg-[#0A0A0A] p-6 sm:p-10 flex flex-col items-center text-center space-y-5">
+                <!-- Eyebrow Subtitle Minimalista -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brandRed/10 border border-brandRed/20">
+                    <span class="inline-block w-2 h-2 rounded-full bg-brandRed animate-pulse"></span>
+                    <span class="text-brandRed font-display font-bold text-xs uppercase tracking-widest">
+                        PIDE FÁCIL Y RÁPIDO
+                    </span>
+                </div>
+
+                <!-- Main Headline -->
+                <h2 class="font-display font-black tracking-tight text-3xl sm:text-5xl md:text-6xl leading-[1.08] uppercase text-center">
+                    <span class="text-white block">TU PLATO FAVORITO,</span>
+                    <span class="text-brandRed block mt-1">EN UNOS CLICS</span>
+                </h2>
+
+                <!-- Action Button Único: Haz tu pedido -->
+                <div class="pt-2 flex items-center justify-center w-full">
+                    <a href="https://wa.me/34600000000?text=Hola%20MR%20WILL,%20deseo%20hacer%20un%20pedido" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-brandRed hover:bg-[#b81424] shadow-xl hover:shadow-red-600/30 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
+                        <i class="fa-solid fa-phone text-xs sm:text-sm"></i>
+                        <span>Haz tu pedido</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- END: App Download & Promo Banner Section (Sección 5) -->
+
+    <!-- BEGIN: Testimonials Section (Sección 6 - Estilo Speech Bubbles con los colores de MR WILL) -->
+    <section class="relative w-full bg-[#0A0A0A] py-20 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden z-10" data-purpose="testimonials-section" id="testimonios">
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <!-- Section Header (Con colores de marca MR WILL) -->
+            <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+                <!-- Headline Principal Grande y Fuerte -->
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white font-display tracking-tight leading-tight uppercase">
+                    Lo que dicen nuestros clientes
+                </h2>
+
+                <!-- Divisor Decorativo Central en Rojo MR WILL -->
+                <div class="flex items-center justify-center gap-2 mt-4 text-brandRed select-none">
+                    <span class="inline-block w-12 sm:w-16 h-[2px] bg-brandRed/70"></span>
+                    <i class="fa-solid fa-leaf text-sm transform -rotate-45"></i>
+                    <i class="fa-solid fa-leaf text-sm transform rotate-45 -ml-1"></i>
+                    <span class="inline-block w-12 sm:w-16 h-[2px] bg-brandRed/70"></span>
+                </div>
+            </div>
+
+            <!-- Testimonial Cards Grid (3 Cards Speech Bubble con comillas flotantes y avatar inferior) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 items-start mb-6">
+                
+                <!-- CARD 1 -->
+                <div class="flex flex-col group">
+                    <!-- Bubble Container (Fondo blanco contrastado) -->
+                    <div class="review-bubble relative">
+                        <!-- Top-Right Floating Quote Icon (Rojo MR WILL) -->
+                        <div class="absolute -top-6 right-6 text-brandRed select-none pointer-events-none">
+                            <span class="text-6xl font-black font-serif leading-none tracking-tighter">“</span>
+                        </div>
+
+                        <!-- 5 Star Rating en bloque rojo redondeado como en la referencia con los colores de MR WILL -->
+                        <div class="flex items-center justify-center gap-1.5 mb-5 text-brandRed">
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+
+                        <!-- Review Text -->
+                        <p class="text-neutral-700 text-sm sm:text-base text-center leading-relaxed font-normal">
+                            “El mejor pollo a la brasa que he probado. La piel súper crocante, la carne jugosa y las cremas caseras con papas doraditas son insuperables.”
+                        </p>
+                    </div>
+
+                    <!-- Client Info Below Bubble -->
+                    <div class="flex items-center gap-3.5 mt-7 ml-5">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" 
+                             alt="Carlos Mendoza" 
+                             class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-brandRed/40" />
+                        <div>
+                            <h4 class="text-white font-bold text-sm sm:text-base font-display leading-tight">
+                                Carlos Mendoza
+                            </h4>
+                            <p class="text-neutral-400 text-xs mt-0.5">
+                                Cliente frecuente
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="flex flex-col group">
+                    <!-- Bubble Container -->
+                    <div class="review-bubble relative">
+                        <!-- Top-Right Floating Quote Icon (Rojo MR WILL) -->
+                        <div class="absolute -top-6 right-6 text-brandRed select-none pointer-events-none">
+                            <span class="text-6xl font-black font-serif leading-none tracking-tighter">“</span>
+                        </div>
+
+                        <!-- 5 Star Rating -->
+                        <div class="flex items-center justify-center gap-1.5 mb-5 text-brandRed">
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+
+                        <!-- Review Text -->
+                        <p class="text-neutral-700 text-sm sm:text-base text-center leading-relaxed font-normal">
+                            “Las parrillas son espectaculares. Pedimos el corte a la leña para compartir en familia y la atención de todo el equipo de MR WILL fue de 10.”
+                        </p>
+                    </div>
+
+                    <!-- Client Info Below Bubble -->
+                    <div class="flex items-center gap-3.5 mt-7 ml-5">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80" 
+                             alt="Laura Gómez" 
+                             class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-brandRed/40" />
+                        <div>
+                            <h4 class="text-white font-bold text-sm sm:text-base font-display leading-tight">
+                                Laura Gómez
+                            </h4>
+                            <p class="text-neutral-400 text-xs mt-0.5">
+                                Visita en restaurante
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="flex flex-col group">
+                    <!-- Bubble Container -->
+                    <div class="review-bubble relative">
+                        <!-- Top-Right Floating Quote Icon (Rojo MR WILL) -->
+                        <div class="absolute -top-6 right-6 text-brandRed select-none pointer-events-none">
+                            <span class="text-6xl font-black font-serif leading-none tracking-tighter">“</span>
+                        </div>
+
+                        <!-- 5 Star Rating -->
+                        <div class="flex items-center justify-center gap-1.5 mb-5 text-brandRed">
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div class="w-7 h-7 rounded-md bg-brandRed text-white flex items-center justify-center text-xs shadow-sm">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+
+                        <!-- Review Text -->
+                        <p class="text-neutral-700 text-sm sm:text-base text-center leading-relaxed font-normal">
+                            “Pedí un combo familiar por delivery y llegó en 25 minutos, súper caliente y en empaques impecables. 100% recomendado para cualquier ocasión.”
+                        </p>
+                    </div>
+
+                    <!-- Client Info Below Bubble -->
+                    <div class="flex items-center gap-3.5 mt-7 ml-5">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80" 
+                             alt="Javier Ramos" 
+                             class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-brandRed/40" />
+                        <div>
+                            <h4 class="text-white font-bold text-sm sm:text-base font-display leading-tight">
+                                Javier Ramos
+                            </h4>
+                            <p class="text-neutral-400 text-xs mt-0.5">
+                                Delivery caliente
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- END: Testimonials Section -->
+
+    <!-- BEGIN: Combined Local & Footer Area (Capa 1: Fondo Fachada z-0 | Capa 2: Footer Superior z-10 | Capa 3: Mapa Frontal z-20) -->
+    <div class="relative w-full overflow-hidden bg-black" id="locales">
+        
+        <!-- SECCIÓN NUESTRO LOCAL: Fondo de Fachada (Capa 1 z-0) y CTA Centrado (z-10) -->
+        <section class="relative w-full pt-20 sm:pt-28 lg:pt-32 pb-44 sm:pb-56 lg:pb-64" data-purpose="locations-banner">
+            <!-- Capa 1 (z-0): Imagen de Fachada de fondo cubriendo todo -->
+            <div class="absolute inset-0 z-0">
+                <img alt="Fachada del restaurante Mr Will Pollos &amp; Parrillas" 
+                     class="w-full h-full object-cover object-center filter brightness-[0.42] contrast-105" 
+                     src="imagenes/Fachada de restaurante Mr Will Parrillas.png"/>
+                <!-- Suave gradiente oscuro para legibilidad perfecta -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-black/50 to-black pointer-events-none"></div>
+            </div>
+
+            <!-- Capa 2 (z-10): CTA Centrado Limpio -->
+            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-brandRed font-display font-bold text-xs sm:text-sm tracking-[0.25em] uppercase block mb-2">
+                    NUESTRO LOCAL
+                </span>
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight uppercase font-display leading-tight mb-4">
+                    VISÍTANOS EN <span class="text-brandRed">MADRID</span>
+                </h2>
+                <p class="text-neutral-300 text-sm sm:text-base font-normal leading-relaxed mb-8 max-w-xl mx-auto">
+                    El auténtico pollo a la brasa y parrillas al calor del carbón. Te esperamos en nuestro acogedor salón.
+                </p>
+
+                <!-- Botón de acción centrado -->
+                <div class="flex items-center justify-center">
+                    <a class="inline-flex items-center gap-3 bg-brandRed hover:bg-[#b81424] text-white font-bold text-xs sm:text-sm uppercase tracking-wider py-4 px-8 rounded-full transition-all duration-200 shadow-xl hover:shadow-red-600/30 active:scale-[0.98]" 
+                       href="https://maps.google.com/?q=Mr+Will+pollos+y+parrillas+Madrid" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Cómo llegar en Google Maps</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capa 2 (z-10): FOOTER COMPLETO más compacto en altura -->
+        <footer class="relative w-full bg-[#0A0A0A] text-white border-t border-white/10 z-10 -mt-20 sm:-mt-28 lg:-mt-32 pt-6 pb-8 sm:pb-12" data-purpose="main-footer" id="contacto">
+            
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Capa 3 (z-20): MAPA FLOTANTE DELANTE DE LA PARTE SUPERIOR DEL FOOTER -->
+                <div class="relative z-20 w-full h-[320px] sm:h-[420px] lg:h-[480px] -mt-14 sm:-mt-20 lg:-mt-24 mb-10 sm:mb-12 rounded-3xl overflow-hidden border border-white/20 shadow-[0_30px_70px_rgba(0,0,0,0.95)] backdrop-blur-sm bg-neutral-900/90">
+                    <!-- Location indicator badge -->
+                    <div class="absolute top-4 left-4 z-30 pointer-events-none">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/85 backdrop-blur-md text-xs font-bold text-white shadow-lg border border-white/10 font-display">
+                            <span class="w-2 h-2 rounded-full bg-brandRed animate-ping"></span>
+                            Mr Will Madrid
+                        </span>
+                    </div>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3041.223121483625!2d-3.71052592452111!3d40.33739616046484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42272aaabb7709%3A0x279342b8f6e5f4d8!2sMr%20Will%20pollos%20y%20parrillas!5e0!3m2!1ses-419!2spe!4v1791218564767!5m2!1ses-419!2spe" 
+                        class="w-full h-full block filter contrast-105" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        title="Ubicación Google Maps Mr Will Madrid">
+                    </iframe>
+                </div>
+
+                <!-- Contenido Principal del Footer -->
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-6 pb-8 border-b border-neutral-800">
+                    
+                    <!-- Left: Logo Mr Will -->
+                    <a aria-label="MR WILL - Inicio" href="#inicio" class="flex items-center group shrink-0 transition-transform duration-300 hover:scale-105">
+                        <img src="imagenes/logo MR WILL -  horizontal.png" 
+                             alt="MR WILL - Pollos &amp; Parrillas" 
+                             class="h-10 sm:h-12 w-auto object-contain logo-white drop-shadow-[0_2px_14px_rgba(255,255,255,0.18)]" />
+                    </a>
+
+                    <!-- Center: Navigation Links -->
+                    <nav aria-label="Navegación del pie de página" class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm text-neutral-300 font-medium">
+                        <a class="hover:text-white transition-colors duration-200" href="#inicio">Inicio</a>
+                        <a class="hover:text-white transition-colors duration-200" href="#menu">Menú</a>
+                        <a class="hover:text-white transition-colors duration-200" href="#nosotros">Sobre Nosotros</a>
+                        <a class="hover:text-white transition-colors duration-200" href="#contacto">Contacto</a>
+                    </nav>
+
+                    <!-- Center-Right: Social Icons -->
+                    <div class="flex items-center gap-3 shrink-0">
+                        <!-- Instagram -->
+                        <a aria-label="Instagram de Mr Will" class="w-9 h-9 rounded-full border border-neutral-700 hover:border-red-500 bg-neutral-900/60 hover:bg-red-600/20 text-neutral-300 hover:text-white flex items-center justify-center transition-all duration-300 transform hover:scale-110" href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram text-base"></i></a>
+                        <!-- Facebook -->
+                        <a aria-label="Facebook de Mr Will" class="w-9 h-9 rounded-full border border-neutral-700 hover:border-red-500 bg-neutral-900/60 hover:bg-red-600/20 text-neutral-300 hover:text-white flex items-center justify-center transition-all duration-300 transform hover:scale-110" href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <!-- TikTok -->
+                        <a aria-label="TikTok de Mr Will" class="w-9 h-9 rounded-full border border-neutral-700 hover:border-red-500 bg-neutral-900/60 hover:bg-red-600/20 text-neutral-300 hover:text-white flex items-center justify-center transition-all duration-300 transform hover:scale-110" href="https://tiktok.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok text-sm"></i></a>
+                    </div>
+
+                    <!-- Right: Handwritten Signature Phrase with Red Accent Brush -->
+                    <div class="relative shrink-0 text-center lg:text-right">
+                        <p class="font-script-calligraphy text-2xl sm:text-3xl lg:text-4xl text-neutral-100 font-bold tracking-wide select-none">
+                            Buen pollo, <br class="hidden sm:inline lg:hidden"/>mejores momentos.
+                        </p>
+                        <!-- Red brush underline curve -->
+                        <div class="mt-1 flex justify-center lg:justify-end">
+                            <svg class="w-36 sm:w-44 h-3.5" viewBox="0 0 180 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 11C45 3 135 2 178 9" stroke="#E50914" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bottom Copyright Row -->
+                <div class="pt-6 text-center">
+                    <p class="text-xs text-neutral-500 font-normal tracking-wide">
+                        &copy; 2025 MR WILL. Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- END: Combined Local & Footer Section -->
+
+    <!-- BEGIN: Interactive Support Script -->
+    <script data-purpose="navbar-interaction">
+        document.addEventListener('DOMContentLoaded', () => {
+            // Header transparency, frosted blur and compact height transition on scroll
+            const header = document.querySelector('header');
+            const handleHeaderScroll = () => {
+                if (window.scrollY > 25) {
+                    header.classList.add('bg-[#0A0A0A]/90', 'backdrop-blur-md', 'shadow-2xl', 'border-white/10', 'header-scrolled');
+                    header.classList.remove('bg-transparent', 'border-transparent');
+                } else {
+                    header.classList.remove('bg-[#0A0A0A]/90', 'backdrop-blur-md', 'shadow-2xl', 'border-white/10', 'header-scrolled');
+                    header.classList.add('bg-transparent', 'border-transparent');
+                }
+            };
+            window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+            handleHeaderScroll();
+
+            // Mobile Sidebar Drawer Controller
+            const mobileMenuOpenBtn = document.getElementById('mobile-menu-open-btn');
+            const mobileSidebarCloseBtn = document.getElementById('mobile-sidebar-close-btn');
+            const mobileSidebar = document.getElementById('mobile-sidebar');
+            const mobileSidebarBackdrop = document.getElementById('mobile-sidebar-backdrop');
+            const mobileSidebarLinks = document.querySelectorAll('.mobile-sidebar-link');
+
+            const openMobileSidebar = () => {
+                if (!mobileSidebar || !mobileSidebarBackdrop) return;
+                mobileSidebar.classList.add('open');
+                mobileSidebarBackdrop.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeMobileSidebar = () => {
+                if (!mobileSidebar || !mobileSidebarBackdrop) return;
+                mobileSidebar.classList.remove('open');
+                mobileSidebarBackdrop.classList.remove('open');
+                document.body.style.overflow = '';
+            };
+
+            if (mobileMenuOpenBtn) {
+                mobileMenuOpenBtn.addEventListener('click', openMobileSidebar);
+            }
+            if (mobileSidebarCloseBtn) {
+                mobileSidebarCloseBtn.addEventListener('click', closeMobileSidebar);
+            }
+            if (mobileSidebarBackdrop) {
+                mobileSidebarBackdrop.addEventListener('click', closeMobileSidebar);
+            }
+            mobileSidebarLinks.forEach(link => {
+                link.addEventListener('click', closeMobileSidebar);
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileSidebar && mobileSidebar.classList.contains('open')) {
+                    closeMobileSidebar();
+                }
+            });
+
+            // Initialize Entrance Animations (Scroll Reveal)
+            initScrollReveal();
+
+            // Initialize Interactive Menu Accordion (Touch / Click support)
+            initMenuAccordion();
+
+            // Initialize Phone Parallax in Section 5 (PIDE FÁCIL Y RÁPIDO)
+            initPhoneParallax();
+        });
+
+        // Entrance Animations logic via IntersectionObserver
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale');
+            if (!reveals.length) return;
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        // Phone Parallax logic on scroll for Section 5 (PIDE FÁCIL Y RÁPIDO)
+        function initPhoneParallax() {
+            const section = document.getElementById('pedido');
+            const phone = document.getElementById('phone-parallax-img');
+            const textCard = document.getElementById('pedido-text-layer');
+            if (!section || !phone) return;
+
+            let ticking = false;
+
+            const updatePhoneParallax = () => {
+                const rect = section.getBoundingClientRect();
+                const vh = window.innerHeight;
+
+                // When section is in viewport
+                if (rect.top <= vh && rect.bottom >= 0) {
+                    const sectionCenter = rect.top + rect.height / 2;
+                    const viewportCenter = vh / 2;
+                    const diff = (viewportCenter - sectionCenter) * 0.12;
+
+                    // Progress of text card superimposing over the phone
+                    let overlapProgress = 0;
+                    if (textCard) {
+                        const cardRect = textCard.getBoundingClientRect();
+                        const phoneRect = phone.getBoundingClientRect();
+                        const distance = cardRect.top - phoneRect.top;
+                        if (distance < phoneRect.height && distance > -phoneRect.height) {
+                            overlapProgress = Math.max(0, Math.min(1, 1 - (distance / phoneRect.height)));
+                        } else if (distance <= -phoneRect.height) {
+                            overlapProgress = 1;
+                        }
+                    }
+
+                    const scale = (1 - overlapProgress * 0.08).toFixed(3);
+                    const brightness = (1 - overlapProgress * 0.25).toFixed(2);
+                    const tilt = Math.max(-2.5, Math.min(2.5, diff * 0.02));
+
+                    phone.style.transform = `translate3d(0, ${diff.toFixed(1)}px, 0) scale(${scale}) rotate(${(-1 + tilt).toFixed(2)}deg)`;
+                    phone.style.filter = `contrast(105%) brightness(${brightness})`;
+                }
+                ticking = false;
+            };
+
+            const onScroll = () => {
+                if (!ticking) {
+                    requestAnimationFrame(updatePhoneParallax);
+                    ticking = true;
+                }
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+            updatePhoneParallax();
+        }
+
+        // Interactive Menu Accordion (Touch / Click support for mobile + persistent active on click)
+        function initMenuAccordion() {
+            const items = document.querySelectorAll('.menu-accordion-item');
+            if (!items.length) return;
+
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    // If user clicked directly on the anchor inside drawer, let it navigate
+                    if (e.target.closest('a')) return;
+
+                    const wasActive = item.classList.contains('is-active');
+                    // Close others
+                    items.forEach(other => other.classList.remove('is-active'));
+                    // Toggle current
+                    if (!wasActive) {
+                        item.classList.add('is-active');
+                    }
+                });
+            });
+        }
+
+        // Floating Action Buttons visibility (Ocultos en el Hero, aparecen al scrollear después del Hero)
+        function initFloatingCTAScroll() {
+            const floatingBar = document.getElementById('floating-cta-bar');
+            const heroSection = document.getElementById('inicio');
+            if (!floatingBar || !heroSection) return;
+
+            const checkScroll = () => {
+                const heroBottom = heroSection.getBoundingClientRect().bottom;
+                // Si el fondo del hero está por encima o cerca del top de la ventana, mostrar
+                if (heroBottom <= 100) {
+                    floatingBar.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-8');
+                    floatingBar.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                } else {
+                    floatingBar.classList.add('opacity-0', 'pointer-events-none', 'translate-y-8');
+                    floatingBar.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                }
+            };
+
+            window.addEventListener('scroll', checkScroll, { passive: true });
+            checkScroll();
+        }
+        initFloatingCTAScroll();
+    </script>
+    <!-- BEGIN: Floating Centered Action Buttons (Aparecen al pasar el hero en scroll) -->
+    <aside id="floating-cta-bar"
+           aria-label="Acciones rápidas flotantes"
+           class="fixed bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center p-1.5 sm:p-2 rounded-full bg-[#121214]/90 backdrop-blur-xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.85)] gap-2 sm:gap-3 transition-all duration-400 ease-out opacity-0 pointer-events-none translate-y-8 hover:scale-[1.02]">
+        
+        <!-- CTA 1: Haz tu pedido (Teléfono) -->
+        <a href="#pedido"
+           class="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wide text-white bg-brandRed hover:bg-[#b81424] transform active:scale-95 transition-all duration-200 whitespace-nowrap">
+            <i class="fa-solid fa-phone text-xs sm:text-sm"></i>
+            <span>Haz tu pedido</span>
+        </a>
+
+        <!-- CTA 2: Haz tu reserva (Calendario) -->
+        <button type="button"
+           onclick="openReservationModal()"
+           class="inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide text-zinc-100 bg-white/[0.08] hover:bg-white/[0.18] border border-white/20 hover:border-white/35 backdrop-blur-md transform active:scale-95 transition-all duration-200 whitespace-nowrap cursor-pointer">
+            <i class="fa-solid fa-calendar-days text-xs sm:text-sm text-brandRed"></i>
+            <span>Haz tu reserva</span>
+        </button>
+    </aside>
+    <!-- END: Floating Centered Action Buttons (Haz tu pedido & Haz tu reserva) -->
+
+    <!-- BEGIN: Floating WhatsApp Button (Posición original) -->
+    <aside aria-label="Contacto por WhatsApp" class="fixed bottom-24 sm:bottom-6 right-4 sm:right-6 z-50 flex items-center group">
+        <!-- Floating Tooltip / Label -->
+        <span class="mr-3 px-3.5 py-1.5 rounded-full bg-neutral-900/90 backdrop-blur-md text-white text-xs font-semibold shadow-xl border border-white/10 opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300 pointer-events-none hidden sm:inline-block">
+            ¡Haz tu pedido por WhatsApp!
+        </span>
+
+        <!-- WhatsApp Circular Button -->
+        <a href="https://wa.me/34600000000?text=Hola%20Mr%20Will%2C%20quisiera%20hacer%20un%20pedido"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Chatear por WhatsApp con Mr Will"
+           class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-[0_8px_25px_rgba(37,211,102,0.45)] hover:shadow-[0_12px_32px_rgba(37,211,102,0.65)] transform hover:scale-110 active:scale-95 transition-all duration-300">
+            <!-- Pulsing Radar Ring -->
+            <span class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-40 pointer-events-none"></span>
+
+            <!-- Official WhatsApp SVG Icon -->
+            <i class="fa-brands fa-whatsapp text-3xl sm:text-4xl text-white relative z-10 drop-shadow-md"></i>
+        </a>
+    </aside>
+    <!-- END: Floating WhatsApp Button -->
+
+    <!-- BEGIN: Reservation Modal (Paso 1: Calendario interactivo -> Paso 2: Personas, Nombre, Celular y Reservar) -->
+    <div id="reservation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" aria-modal="true" role="dialog">
+        <!-- Modal Card Container -->
+        <div class="relative w-full max-w-lg bg-[#141416] border border-white/15 rounded-3xl p-6 sm:p-8 text-white shadow-[0_25px_60px_rgba(0,0,0,0.95)] transform scale-95 transition-all duration-300 overflow-hidden" id="reservation-card">
+            
+            <!-- Close Button -->
+            <button type="button" onclick="closeReservationModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-zinc-400 hover:text-white transition-colors cursor-pointer" aria-label="Cerrar modal">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="mb-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brandRed/15 text-brandRed text-[11px] font-bold uppercase tracking-wider mb-2 font-display">
+                    <i class="fa-solid fa-calendar-days text-xs"></i>
+                    <span id="reservation-step-indicator">Paso 1 de 2: Fecha y Hora</span>
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-black font-display tracking-tight uppercase text-white">
+                    Reserva tu Mesa en <span class="text-brandRed">Mr Will</span>
+                </h3>
+            </div>
+
+            <!-- PASO 1: Calendario Interactivo -->
+            <div id="reservation-step-1" class="space-y-4">
+                <!-- Month & Year Selector -->
+                <div class="flex items-center justify-between px-2 pb-2 border-b border-white/10">
+                    <button type="button" onclick="prevMonth()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-sm transition-colors cursor-pointer">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <span id="calendar-month-year" class="font-display font-bold text-base uppercase tracking-wider text-neutral-100">
+                        Octubre 2026
+                    </span>
+                    <button type="button" onclick="nextMonth()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-sm transition-colors cursor-pointer">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Calendar Weekdays -->
+                <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-neutral-400 py-1">
+                    <span>Do</span><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span>
+                </div>
+
+                <!-- Calendar Days Grid -->
+                <div id="calendar-days-grid" class="grid grid-cols-7 gap-1.5 text-center text-sm">
+                    <!-- Dynamic Days inserted by JS -->
+                </div>
+
+                <!-- Time Slots Selector -->
+                <div class="pt-3 border-t border-white/10">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-2 font-display">
+                        Selecciona el turno / hora:
+                    </label>
+                    <div id="time-slots-container" class="grid grid-cols-4 gap-2">
+                        <button type="button" onclick="selectTimeSlot('13:00')" class="time-slot-btn py-2 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-brandRed hover:border-brandRed transition-all cursor-pointer">13:00</button>
+                        <button type="button" onclick="selectTimeSlot('14:30')" class="time-slot-btn py-2 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-brandRed hover:border-brandRed transition-all cursor-pointer">14:30</button>
+                        <button type="button" onclick="selectTimeSlot('20:00')" class="time-slot-btn py-2 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-brandRed hover:border-brandRed transition-all cursor-pointer">20:00</button>
+                        <button type="button" onclick="selectTimeSlot('21:30')" class="time-slot-btn py-2 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-brandRed hover:border-brandRed transition-all cursor-pointer">21:30</button>
+                    </div>
+                </div>
+
+                <!-- Step 1 Button: Continuar -->
+                <div class="pt-4">
+                    <button type="button" onclick="goToStep2()" id="btn-goto-step2" class="w-full py-3.5 px-6 rounded-full bg-brandRed hover:bg-[#b81424] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span>Continuar con mis datos</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PASO 2: Personas, Nombre, Celular y Reservar -->
+            <form id="reservation-step-2" class="space-y-4 hidden" onsubmit="submitReservation(event)">
+                <!-- Resumen de Fecha y Hora elegida -->
+                <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white/5 border border-white/10 text-xs">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-calendar-check text-brandRed text-base"></i>
+                        <div>
+                            <span class="text-neutral-400 block text-[10px] uppercase font-bold">Fecha y Hora:</span>
+                            <span id="summary-datetime" class="font-bold text-white text-sm">--</span>
+                        </div>
+                    </div>
+                    <button type="button" onclick="goToStep1()" class="text-xs text-brandRed hover:underline font-bold">
+                        Cambiar
+                    </button>
+                </div>
+
+                <!-- Selector de Personas -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-display">
+                        Cantidad de Personas:
+                    </label>
+                    <div class="grid grid-cols-5 gap-2" id="guests-selector">
+                        <button type="button" onclick="selectGuests(2)" class="guest-btn py-2.5 text-xs font-bold rounded-xl border border-brandRed bg-brandRed text-white transition-all cursor-pointer">2 pers</button>
+                        <button type="button" onclick="selectGuests(4)" class="guest-btn py-2.5 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-white/15 text-neutral-200 transition-all cursor-pointer">4 pers</button>
+                        <button type="button" onclick="selectGuests(6)" class="guest-btn py-2.5 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-white/15 text-neutral-200 transition-all cursor-pointer">6 pers</button>
+                        <button type="button" onclick="selectGuests(8)" class="guest-btn py-2.5 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-white/15 text-neutral-200 transition-all cursor-pointer">8 pers</button>
+                        <button type="button" onclick="selectGuests('10+')" class="guest-btn py-2.5 text-xs font-bold rounded-xl border border-white/10 bg-white/5 hover:bg-white/15 text-neutral-200 transition-all cursor-pointer">+10 pers</button>
+                    </div>
+                    <input type="hidden" id="input-guests" value="2" />
+                </div>
+
+                <!-- Nombre Completo -->
+                <div>
+                    <label for="input-name" class="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-display">
+                        Nombre Completo:
+                    </label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 text-xs"></i>
+                        <input type="text" id="input-name" required placeholder="Ej. Juan Pérez" class="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brandRed focus:ring-1 focus:ring-brandRed" />
+                    </div>
+                </div>
+
+                <!-- Celular / WhatsApp -->
+                <div>
+                    <label for="input-phone" class="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5 font-display">
+                        Celular / WhatsApp:
+                    </label>
+                    <div class="relative">
+                        <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 text-xs"></i>
+                        <input type="tel" id="input-phone" required placeholder="Ej. +34 600 000 000" class="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-brandRed focus:ring-1 focus:ring-brandRed" />
+                    </div>
+                </div>
+
+                <!-- Botones Volver / Confirmar Reserva -->
+                <div class="pt-3 flex items-center gap-3">
+                    <button type="button" onclick="goToStep1()" class="py-3 px-5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-neutral-300 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer">
+                        Atrás
+                    </button>
+                    <button type="submit" class="flex-1 py-3.5 px-6 rounded-full bg-brandRed hover:bg-[#b81424] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-95">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Confirmar y Reservar</span>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Script de Lógica del Modal y Calendario de Reserva -->
+    <script>
+        let currentCalendarDate = new Date();
+        let selectedDate = null;
+        let selectedTime = '13:00';
+        let selectedGuestsCount = '2';
+
+        const monthNames = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+
+        function openReservationModal() {
+            const modal = document.getElementById('reservation-modal');
+            const card = document.getElementById('reservation-card');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+            
+            // Render calendar for current month
+            renderCalendar();
+            goToStep1();
+        }
+
+        function closeReservationModal() {
+            const modal = document.getElementById('reservation-modal');
+            const card = document.getElementById('reservation-card');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100', 'pointer-events-auto');
+            card.classList.add('scale-95');
+            card.classList.remove('scale-100');
+        }
+
+        // Close on backdrop click
+        document.getElementById('reservation-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'reservation-modal') closeReservationModal();
+        });
+
+        function renderCalendar() {
+            const monthYearEl = document.getElementById('calendar-month-year');
+            const daysGrid = document.getElementById('calendar-days-grid');
+            
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            
+            monthYearEl.textContent = `${monthNames[month]} ${year}`;
+            daysGrid.innerHTML = '';
+
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const totalDays = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            // Empty slots for previous month offset
+            for (let i = 0; i < firstDayIndex; i++) {
+                const emptySlot = document.createElement('div');
+                emptySlot.className = 'py-2';
+                daysGrid.appendChild(emptySlot);
+            }
+
+            // Days of current month
+            for (let day = 1; day <= totalDays; day++) {
+                const dayDate = new Date(year, month, day);
+                const isPast = dayDate < today;
+                const isSelected = selectedDate && selectedDate.toDateString() === dayDate.toDateString();
+
+                const dayBtn = document.createElement('button');
+                dayBtn.type = 'button';
+                dayBtn.textContent = day;
+                dayBtn.className = `py-2 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer ${
+                    isSelected 
+                        ? 'bg-brandRed text-white font-bold shadow-md shadow-red-600/40' 
+                        : isPast 
+                            ? 'text-neutral-600 opacity-40 cursor-not-allowed' 
+                            : 'text-neutral-200 hover:bg-white/10 hover:text-white'
+                }`;
+
+                if (!isPast) {
+                    dayBtn.onclick = () => {
+                        selectedDate = dayDate;
+                        renderCalendar();
+                    };
+                } else {
+                    dayBtn.disabled = true;
+                }
+
+                daysGrid.appendChild(dayBtn);
+            }
+
+            // Default select today or tomorrow if none selected
+            if (!selectedDate) {
+                selectedDate = new Date(today);
+                // If today is late, let's select tomorrow or today
+                renderCalendar();
+            }
+        }
+
+        function prevMonth() {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        function selectTimeSlot(time) {
+            selectedTime = time;
+            document.querySelectorAll('.time-slot-btn').forEach(btn => {
+                if (btn.textContent.trim() === time) {
+                    btn.classList.add('bg-brandRed', 'border-brandRed', 'text-white');
+                    btn.classList.remove('bg-white/5', 'border-white/10');
+                } else {
+                    btn.classList.remove('bg-brandRed', 'border-brandRed', 'text-white');
+                    btn.classList.add('bg-white/5', 'border-white/10');
+                }
+            });
+        }
+
+        function goToStep1() {
+            document.getElementById('reservation-step-1').classList.remove('hidden');
+            document.getElementById('reservation-step-2').classList.add('hidden');
+            document.getElementById('reservation-step-indicator').textContent = 'Paso 1 de 2: Fecha y Hora';
+        }
+
+        function goToStep2() {
+            if (!selectedDate) {
+                alert('Por favor, selecciona un día en el calendario.');
+                return;
+            }
+            document.getElementById('reservation-step-1').classList.add('hidden');
+            document.getElementById('reservation-step-2').classList.remove('hidden');
+            document.getElementById('reservation-step-indicator').textContent = 'Paso 2 de 2: Tus Datos';
+
+            const formattedDate = `${selectedDate.getDate()} de ${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()} - ${selectedTime} hs`;
+            document.getElementById('summary-datetime').textContent = formattedDate;
+        }
+
+        function selectGuests(count) {
+            selectedGuestsCount = count;
+            document.getElementById('input-guests').value = count;
+            document.querySelectorAll('.guest-btn').forEach(btn => {
+                if (btn.textContent.includes(String(count))) {
+                    btn.classList.add('bg-brandRed', 'border-brandRed', 'text-white');
+                    btn.classList.remove('bg-white/5', 'border-white/10', 'text-neutral-200');
+                } else {
+                    btn.classList.remove('bg-brandRed', 'border-brandRed', 'text-white');
+                    btn.classList.add('bg-white/5', 'border-white/10', 'text-neutral-200');
+                }
+            });
+        }
+
+        function submitReservation(e) {
+            e.preventDefault();
+            const name = document.getElementById('input-name').value.trim();
+            const phone = document.getElementById('input-phone').value.trim();
+            const guests = document.getElementById('input-guests').value;
+            const formattedDate = `${selectedDate.getDate()} de ${monthNames[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`;
+
+            const message = `¡Hola MR WILL! Deseo realizar una reserva:\n\n` +
+                            `👤 *Nombre:* ${name}\n` +
+                            `📞 *Teléfono:* ${phone}\n` +
+                            `👥 *Personas:* ${guests}\n` +
+                            `📅 *Fecha:* ${formattedDate}\n` +
+                            `⏰ *Hora:* ${selectedTime} hs\n\n` +
+                            `Por favor confírmenme la disponibilidad. ¡Muchas gracias!`;
+
+            const whatsappUrl = `https://wa.me/34600000000?text=${encodeURIComponent(message)}`;
+            
+            // Cerrar modal y abrir WhatsApp
+            closeReservationModal();
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+
+</html>
